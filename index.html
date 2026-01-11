@@ -3,91 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro Tool Site</title>
+    <title>Free Tool Site | All-in-One Utility</title>
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 1. GLOBAL STYLES --- */
+        :root {
+            --primary: #3b82f6;
+            --accent: #ec4899;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --border: rgba(255, 255, 255, 0.1);
+            --boxline-glow: rgba(59, 130, 246, 0.5);
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
         body {
-            background-color: #0f172a; /* Dark Navy Background */
+            background-color: var(--dark-bg);
             color: #e2e8f0;
             overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 40%);
         }
-
-        /* --- 2. NAVBAR --- */
+        /* --- STICKY GLASS HEADER --- */
         .navbar {
-            padding: 20px 5%;
+            padding: 15px 8%;
             display: flex;
-            justify-content: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            justify-content: space-between;
+            align-items: center;
             background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
         }
-        .logo { font-size: 24px; font-weight: 700; color: white; display: flex; align-items: center; gap: 10px; }
-        .logo i { color: #3b82f6; animation: spin 5s linear infinite; }
-        .logo span { color: #3b82f6; }
-
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        /* --- 3. HERO SECTION (ANIMATED TEXT) --- */
-        .hero {
+        .logo { 
+            font-size: 24px; 
+            font-weight: 800; 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        .logo i { 
+            color: var(--primary); 
+            animation: pulse 2s infinite ease-in-out; 
+            text-shadow: 0 0 15px var(--primary);
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.2); filter: brightness(1.3); }
+        }
+        /* --- WEBSITE BANNER --- */
+        .hero-banner {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1470');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 60px 20px;
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 70%);
+            padding: 0 20px;
         }
-        .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
-        
-        /* Animated Gradient Text */
+        .hero-banner h1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; margin-bottom: 10px; }
         .gradient-text {
-            background: linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+            background: linear-gradient(90deg, #3b82f6, #a78bfa, #ec4899);
             -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            background-size: 300%;
-            animation: flowText 5s infinite linear;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: flow 4s linear infinite;
         }
-        @keyframes flowText { 0% { background-position: 0%; } 100% { background-position: 100%; } }
-
-        .hero p { color: #94a3b8; font-size: 16px; margin-bottom: 30px; }
-
-        /* --- 4. SEARCH BAR --- */
-        .search-wrapper {
-            background: #1e293b;
-            padding: 8px 20px;
+        @keyframes flow { to { background-position: 200% center; } }
+        /* --- SEARCH & CATEGORIES --- */
+        .search-area { margin-top: -45px; text-align: center; padding: 0 20px; }
+        .search-box {
+            background: var(--card-bg);
+            padding: 8px 15px;
             border-radius: 50px;
             display: inline-flex;
             align-items: center;
             width: 100%;
-            max-width: 500px;
-            border: 2px solid #334155;
+            max-width: 550px;
+            border: 2px solid var(--border);
             transition: 0.3s;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
-        .search-wrapper:focus-within {
-            border-color: #3b82f6;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-            transform: scale(1.02);
-        }
-        .search-wrapper input {
+        .search-box:focus-within { border-color: var(--primary); transform: scale(1.02); }
+        .search-box input {
             background: transparent; border: none; outline: none;
-            color: white; font-size: 16px; width: 100%; margin-left: 10px;
+            color: white; font-size: 16px; width: 100%; padding: 10px;
         }
-        .search-btn {
-            background: #3b82f6; color: white; border: none;
-            padding: 10px 25px; border-radius: 30px; font-weight: 600; cursor: pointer;
-            transition: 0.3s;
-        }
-        .search-btn:hover { background: #2563eb; }
-
-        /* --- 5. CATEGORY BUTTONS (ANIMATED) --- */
         .category-container {
-            margin-top: 30px;
+            margin: 35px 0;
             display: flex;
             justify-content: center;
             gap: 10px;
@@ -95,127 +108,117 @@
         }
         .cat-btn {
             background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--border);
             color: #cbd5e1;
-            padding: 10px 20px;
+            padding: 10px 22px;
             border-radius: 12px;
             cursor: pointer;
             transition: 0.3s;
             font-weight: 500;
         }
-        .cat-btn:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateY(-3px);
+        .cat-btn.active, .cat-btn:hover {
+            background: var(--primary);
             color: white;
-        }
-        .cat-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
+            border-color: var(--primary);
             box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
         }
-
-        /* --- 6. TOOL GRID (THE MAIN CARDS) --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        
+        /* --- TWO COLUMN MAIN LAYOUT --- */
+        .main-wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2.5fr 1fr;
+            gap: 30px;
+            padding: 20px;
+        }
+        /* --- GRID & CARD DESIGN --- */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 20px;
-            padding-bottom: 50px;
         }
-
-        /* --- 7. CARD DESIGN (HOVER BORDER ANIMATION) --- */
         .card {
-            background: #1e293b;
+            background: var(--card-bg);
             border-radius: 16px;
-            padding: 25px;
+            padding: 25px 15px;
             text-align: center;
             text-decoration: none;
             color: white;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #334155;
+            border: 1px solid var(--border);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
         }
-
-        /* Hover Effect: Lift & Glow */
         .card:hover {
             transform: translateY(-8px);
-            border-color: transparent;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
         }
-
-        /* The Animated Border using ::before */
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 16px;
-            padding: 2px; /* Border Width */
-            background: linear-gradient(45deg, #ff0055, #00ddff);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: 0.4s;
-        }
-        .card:hover::before { opacity: 1; }
-
-        /* Icon Animation */
         .icon-box {
             font-size: 32px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             transition: 0.4s;
         }
-        /* Icon Colors */
-        .c-blue { color: #60a5fa; text-shadow: 0 0 20px rgba(96, 165, 250, 0.4); }
-        .c-orange { color: #fbbf24; text-shadow: 0 0 20px rgba(251, 191, 36, 0.4); }
-        .c-purple { color: #a78bfa; text-shadow: 0 0 20px rgba(167, 139, 250, 0.4); }
-        .c-green { color: #34d399; text-shadow: 0 0 20px rgba(52, 211, 153, 0.4); }
-
-        .card:hover .icon-box {
-            transform: scale(1.2) rotate(5deg);
+        .card:hover .icon-box { transform: scale(1.2) rotate(5deg); }
+        .c-blue { color: #60a5fa; }
+        .c-orange { color: #fbbf24; }
+        .c-purple { color: #a78bfa; }
+        .c-green { color: #34d399; }
+        .card h3 { font-size: 15px; font-weight: 600; margin-bottom: 5px; }
+        .card p { font-size: 12px; color: #94a3b8; }
+        /* --- SIDEBAR DESCRIPTION --- */
+        .sidebar {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
         }
-
-        .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 5px; z-index: 2; }
-        .card p { font-size: 12px; color: #94a3b8; z-index: 2; }
-
-        /* Footer */
-        footer { text-align: center; padding: 40px; color: #64748b; font-size: 14px; border-top: 1px solid #334155; }
-
-        /* Responsive */
+        .sidebar h2 { color: var(--primary); font-size: 22px; margin-bottom: 15px; border-left: 4px solid var(--accent); padding-left: 10px; }
+        .sidebar p { font-size: 14px; line-height: 1.8; color: #94a3b8; margin-bottom: 20px; }
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 80px;
+            padding: 40px 5%;
+            background: #070b14;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        footer p { color: #64748b; font-size: 14px; }
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .main-wrapper { grid-template-columns: 1fr; }
+            .sidebar { order: -1; position: static; }
+        }
         @media (max-width: 600px) {
-            .hero h1 { font-size: 32px; }
             .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .card { padding: 20px 15px; }
-            .icon-box { font-size: 26px; }
+            .hero-banner h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
-
     <nav class="navbar">
         <div class="logo">
-            <i class="fa-duotone fa-screwdriver-wrench"></i> Free Tool <span>Site</span>
+            <i class="fa-solid fa-toolbox"></i> Free Tool <span>Site</span>
+        </div>
+        <div class="nav-links">
+            <i class="fa-solid fa-circle-half-stroke" style="cursor:pointer; font-size: 20px;"></i>
         </div>
     </nav>
-
-    <header class="hero">
+    <header class="hero-banner">
         <h1>All Tools in <span class="gradient-text">One Place</span></h1>
-        <p>Search 30+ tools. 100% Free.</p>
-        
-        <div class="search-container">
-            <div class="search-wrapper">
-                <i class="fa-solid fa-magnifying-glass" style="color:#94a3b8"></i>
-                <input type="text" id="searchInput" placeholder="Find a tool..." onkeyup="filterTools()">
-                <button class="search-btn">Search</button>
-            </div>
+        <p style="color: #cbd5e1; max-width: 600px;">Fast, secure, and 100% free web utilities for everyday tasks.</p>
+    </header>
+    <section class="search-area">
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass" style="color:#94a3b8"></i>
+            <input type="text" id="searchInput" placeholder="Search across 30+ tools..." onkeyup="filterTools()">
+            <button style="background:var(--primary); border:none; color:white; padding:8px 20px; border-radius:30px; cursor:pointer; font-weight:600; margin-left:10px;">Search</button>
         </div>
-
         <div class="category-container">
             <button class="cat-btn active" onclick="filterCategory('all', this)">All</button>
             <button class="cat-btn" onclick="filterCategory('text', this)">Text</button>
@@ -223,9 +226,8 @@
             <button class="cat-btn" onclick="filterCategory('math', this)">Math</button>
             <button class="cat-btn" onclick="filterCategory('dev', this)">Dev</button>
         </div>
-    </header>
-
-    <div class="container">
+    </section>
+    <main class="main-wrapper">
         <div class="grid" id="toolGrid">
             
             <a href="word-counter.html" class="card" data-cat="text">
@@ -250,16 +252,20 @@
             </a>
             <a href="about-us-gen.html" class="card" data-cat="text">
                 <div class="icon-box c-blue"><i class="fa-solid fa-address-card"></i></div>
-                <h3>About Us Gen</h3> <p>Create About page.</p>
+                <h3>About Us Gen</h3> <p>Create page.</p>
             </a>
             <a href="terms-generator.html" class="card" data-cat="text">
                 <div class="icon-box c-blue"><i class="fa-solid fa-file-contract"></i></div>
-                <h3>Terms Generator</h3> <p>Legal page maker.</p>
+                <h3>Terms Generator</h3> <p>Legal maker.</p>
             </a>
 
+            <a href="background-remover.html" class="card" data-cat="image">
+                <div class="icon-box c-green"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>BG Remover</h3> <p>Remove background.</p>
+            </a>
             <a href="id-card-maker.html" class="card" data-cat="image">
                 <div class="icon-box c-orange"><i class="fa-solid fa-id-card-clip"></i></div>
-                <h3>ID Card Maker</h3> <p>Aadhar/PAN Print.</p>
+                <h3>ID Card Maker</h3> <p>Aadhar/PAN.</p>
             </a>
             <a href="photo-resizer.html" class="card" data-cat="image">
                 <div class="icon-box c-purple"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></div>
@@ -302,8 +308,7 @@
                 <div class="icon-box c-orange"><i class="fa-solid fa-weight-scale"></i></div>
                 <h3>BMI Calculator</h3> <p>Health Score.</p>
             </a>
-            </div>
-           <a href="loan-calculator.html" class="card" data-cat="math">
+            <a href="loan-calculator.html" class="card" data-cat="math">
                 <div class="icon-box c-orange"><i class="fa-solid fa-money-bill"></i></div>
                 <h3>Loan Calc</h3> <p>EMI Check.</p>
             </a>
@@ -315,21 +320,18 @@
                 <div class="icon-box c-orange"><i class="fa-solid fa-tags"></i></div>
                 <h3>Discount</h3> <p>Sale price.</p>
             </a>
-        <a href="currency-converter.html" class="card" data-cat="math">
-    <div class="icon-box c-orange">
-        <i class="fa-solid fa-coins"></i>
-    </div>
-    <h3>Currency Converter</h3>
-    <p>Convert currency live.</p>
-        </a>
             <a href="crypto-price.html" class="card" data-cat="math">
                 <div class="icon-box c-orange"><i class="fa-brands fa-bitcoin"></i></div>
                 <h3>Crypto Price</h3> <p>Live rates.</p>
             </a>
+            <a href="currency-converter.html" class="card" data-cat="math">
+                <div class="icon-box c-orange"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                <h3>Currency Converter</h3> <p>Exchange rates.</p>
+            </a>
 
             <a href="qr-gen.html" class="card" data-cat="dev">
                 <div class="icon-box c-purple"><i class="fa-solid fa-qrcode"></i></div>
-                <h3>QR Generator</h3> <p>Make QR code.</p>
+                <h3>QR Generator</h3> <p>Make QR.</p>
             </a>
             <a href="password-gen.html" class="card" data-cat="dev">
                 <div class="icon-box c-purple"><i class="fa-solid fa-key"></i></div>
@@ -337,7 +339,7 @@
             </a>
             <a href="contact-gen.html" class="card" data-cat="dev">
                 <div class="icon-box c-purple"><i class="fa-solid fa-envelope"></i></div>
-                <h3>Contact Gen</h3> <p>HTML Contact.</p>
+                <h3>Contact Gen</h3> <p>HTML Form.</p>
             </a>
             <a href="html-viewer.html" class="card" data-cat="dev">
                 <div class="icon-box c-purple"><i class="fa-brands fa-html5"></i></div>
@@ -359,43 +361,36 @@
                 <div class="icon-box c-purple"><i class="fa-solid fa-server"></i></div>
                 <h3>Whois</h3> <p>Domain info.</p>
             </a>
-
-        </div> 
-    </div> 
-
+        </div>
+        <aside class="sidebar">
+            <h2>About Site</h2>
+            <p>Welcome to <strong>Free Tool Site</strong>. Our mission is to provide the most comprehensive suite of free web tools in one easy-to-access dashboard.</p>
+            
+            <div style="background: rgba(59, 130, 246, 0.1); padding: 15px; border-radius: 10px; border-left: 3px solid var(--primary);">
+                <small>Pro Tip: Use the search bar above to instantly find any of our 30+ tools.</small>
+            </div>
+        </aside>
+    </main>
     <footer>
-        <p class="footer-text">&copy; 2024 Free Tool Site. All rights reserved.</p>
+        <p>&copy; 2024 Free Tool Site. All rights reserved.</p>
     </footer>
-
     <script>
         function filterCategory(category, btn) {
             let cards = document.querySelectorAll('.card');
             let buttons = document.querySelectorAll('.cat-btn');
-
             buttons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
             cards.forEach(card => {
                 let cat = card.getAttribute('data-cat');
-                if (category === 'all' || cat === category) {
-                    card.style.display = "flex";
-                } else {
-                    card.style.display = "none";
-                }
+                card.style.display = (category === 'all' || cat === category) ? "flex" : "none";
             });
         }
-
         function filterTools() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.querySelectorAll('.card');
-
             cards.forEach(card => {
                 let title = card.querySelector('h3').innerText.toLowerCase();
-                if (title.includes(input)) {
-                    card.style.display = "flex";
-                } else {
-                    card.style.display = "none";
-                }
+                card.style.display = title.includes(input) ? "flex" : "none";
             });
         }
     </script>
